@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wellness & Celebration Weekend — Tarifa 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #FF6B6B;
+    --ocean: #0077B6;
+    --ocean-light: #00B4D8;
+    --sand: #FFF3E0;
+    --sunset: #FF8C42;
+    --mint: #2EC4B6;
+    --dark: #1A1A2E;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--dark);
+    background: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── SECTION BACKGROUND WRAPPERS ── */
+  .section-bg {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  .section-bg > section {
+    background: transparent;
+  }
+
+  /* ── TRANSPARENT GLASSMORPHISM FOR ALL CARDS / BOXES ── */
+  .card,
+  .timeline-day,
+  .flight-box,
+  .kite-level-card,
+  .faq-item,
+  .accom-card,
+  .price-table,
+  .vibe-banner,
+  section > div[style*="background: linear-gradient"] {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  /* Inner boxes (feature grids, amenity tiles) */
+  .card div[style*="background: rgba"],
+  section div[style*="background: rgba(255,255,255"] {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px;
+  }
+
+  .timeline-day {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-left: 5px solid var(--ocean-light);
+  }
+
+  .photo-divider .photo-text {
+    background: rgba(0,0,0,0.55);
+    padding: 1.5rem 2.5rem;
+    border-radius: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .card, .timeline-day, .flight-box, .kite-level-card {
+      background: rgba(255, 255, 255, 0.93) !important;
+    }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background-image: url('photos/tarifeopening.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+  }
+
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-2%, 2%) rotate(3deg); }
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-emoji { font-size: 4rem; margin-bottom: 1rem; animation: bounce 2s ease infinite; }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.1);
+  }
+
+  .hero .subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero .dates {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    animation: fadeInOut 3s ease infinite;
+    z-index: 2;
+  }
+
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── NAV PILLS ── */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 0.8rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .nav-bar a {
+    text-decoration: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--dark);
+    background: #f0f0f0;
+    transition: all 0.2s;
+  }
+
+  .nav-bar a:hover {
+    background: var(--ocean);
+    color: var(--white);
+    transform: translateY(-1px);
+  }
+
+  /* ── PHOTO DIVIDERS ── */
+  .photo-divider {
+    height: 50vh;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .photo-divider::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+  }
+
+  .photo-divider .photo-text {
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    padding: 0 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .photo-divider {
+      height: 35vh;
+    }
+    .section-bg {
+      background-attachment: scroll;
+    }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 20px;
+    padding: 2rem;
+  }
+
+  .section-header .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+  .section-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header p {
+    color: #666;
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .timeline-day h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    color: var(--ocean);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .timeline-day ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timeline-day li {
+    padding: 0.4rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .timeline-day li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--mint);
+    font-weight: 700;
+  }
+
+  /* ── CARDS GRID ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .card .card-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+
+  .card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card p { color: #555; line-height: 1.6; font-size: 0.95rem; }
+
+  /* ── PRICE TABLE ── */
+  .price-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .price-table thead {
+    background: linear-gradient(135deg, var(--ocean) 0%, var(--ocean-light) 100%);
+    color: white;
+  }
+
+  .price-table th {
+    padding: 1rem 1.2rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+  }
+
+  .price-table td {
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95rem;
+  }
+
+  .price-table tr:last-child td { border-bottom: none; }
+
+  .price-table tbody tr:hover { background: rgba(248,251,255,0.5); }
+
+  .price-highlight {
+    background: linear-gradient(135deg, var(--mint), var(--ocean-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  /* ── FLIGHT BOXES ── */
+  .flight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .flight-grid { grid-template-columns: 1fr; }
+  }
+
+  .flight-box-header {
+    padding: 1rem 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .flight-box:nth-child(1) .flight-box-header { background: linear-gradient(135deg, #E63946, #FF6B6B); }
+  .flight-box:nth-child(2) .flight-box-header { background: linear-gradient(135deg, #0077B6, #00B4D8); }
+
+  .flight-box-body { padding: 1.2rem 1.5rem; }
+
+  .flight-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(240,240,240,0.6);
+    font-size: 0.9rem;
+  }
+
+  .flight-row:last-child { border-bottom: none; }
+
+  .flight-label { color: #888; }
+  .flight-value { font-weight: 600; }
+
+  /* ── KITE INFO ── */
+  .kite-levels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .kite-levels { grid-template-columns: 1fr; }
+  }
+
+  .kite-level-card .level-emoji { font-size: 3rem; margin-bottom: 0.8rem; }
+
+  .kite-level-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 0.5rem;
+  }
+
+  .kite-level-card .price-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--ocean), var(--ocean-light));
+    color: white;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    margin: 0.8rem 0;
+  }
+
+  .kite-level-card p { color: #666; font-size: 0.9rem; line-height: 1.5; }
+
+  /* ── FAQ / ACCORDION (native details/summary) ── */
+  .faq-list { display: flex; flex-direction: column; gap: 0.8rem; }
+
+  .faq-item {
+    overflow: visible !important;
+  }
+
+  .faq-item summary {
+    padding: 1.2rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-height: 56px;
+    user-select: none;
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::marker { display: none; content: ''; }
+
+  .faq-item summary:hover { background: rgba(248,249,250,0.5); }
+
+  .faq-item summary .arrow {
+    transition: transform 0.3s;
+    font-size: 1.4rem;
+    color: var(--ocean);
+    padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] summary .arrow { transform: rotate(180deg); }
+
+  .faq-item .faq-a {
+    padding: 0 1.5rem 1.2rem;
+    color: #555;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  /* ── ACCOMMODATION ── */
+  .badge {
+    display: inline-block;
+    background: var(--sunset);
+    color: white;
+    padding: 0.2rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-green { background: var(--mint); }
+
+  /* ── VIBE BANNER ── */
+  .vibe-banner h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .vibe-banner p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+  }
+
+  footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+  }
+
+  footer > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  footer .footer-emoji { font-size: 2rem; margin-bottom: 1rem; }
+  footer a { color: rgba(255,255,255,0.95); text-decoration: none; font-weight: 600; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    section { padding: 3rem 1rem; }
+    .hero h1 { font-size: 2.8rem; }
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-emoji">🪁</div>
+    <h1> Tarifa Weekend</h1>
+    <p class="subtitle"> & Celebrations of your favourite Astro girl 🍄🚀</p>
+    <p class="subtitle" style="font-size: 1rem; opacity: 0.8;">Tarifa, Spain — Wind, Waves & Good Times</p>
+    <p class="subtitle" style="font-size: 1rem; opacity: 0.8;">The southernmost point of Europe, where the Mediterranean meets the Atlantic</p>
+    <div class="dates">📅 Thursday 30 April — Sunday 4 May 2026</div>
+  </div>
+  <div class="scroll-hint">↓ Scroll to explore the plan ↓</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#schedule">Schedule</a>
+  <a href="#getting-there">Getting There</a>
+  <a href="#accommodation">Stay</a>
+  <a href="#kitesurfing">Kitesurfing</a>
+  <a href="#prices">Prices</a>
+  <a href="#food">Food & Drinks</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<!-- SECTION: SCHEDULE -->
+<div class="section-bg" style="background-image: url('photos/me_water.jpeg');">
+<div class="photo-divider">
+  <div class="photo-text"> Where we let go of the big city stress</div>
+</div>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="section-header">
+    <div class="icon">🗓️</div>
+    <h2>The Game Plan</h2>
+    <p>4 days of sun, wind, food and celebration. No stress, just vibes.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-day">
+      <h3>🛬 Thursday 30 April — Arrival Day</h3>
+      <ul>
+        <li>Land in Málaga (evening flights from London & Paris)</li>
+        <li>Pick up rental cars at the airport</li>
+        <li>Drive to Tarifa (~1h30,  coastal road)</li>
+        <li>Settle into the Airbnb, beers on the terrace then Tapas, welcome vibes</li>
+      </ul>
+    </div>
+
+    <div class="timeline-day">
+      <h3>🪁 Friday 1 May — Kite Day 1 <span class="badge-green badge">Bank Holiday</span></h3>
+      <ul>
+        <li>Morning: Chill breakfast, coffee, get your bearings</li>
+        <li>Late morning: Beginners kitesurf lessons (group or private)</li>
+        <li>Experienced kiters: head to the beach, gear up, ride!</li>
+        <li>Afternoon: More kiting or explore Old Town, tapas, beach walk</li>
+        <li>Evening: Casual group dinner in Old Town</li>
+      </ul>
+    </div>
+
+    <div class="timeline-day" style="border-left-color: var(--coral);">
+      <h3>🎂 Saturday 2 May — BIRTHDAY 🎉</h3>
+      <ul>
+        <li>Morning: Kite sessions / beach / wellness time</li>
+        <li>Afternoon: Free time — explore, surf, relax, yoga on the beach</li>
+        <li>Evening: <strong>Birthday dinner</strong> at a beautiful restaurant in Old Town</li>
+        <li>Night: Drinks, music, dancing, whatever we want — let's celebrate! 🥂</li>
+      </ul>
+    </div>
+
+    <div class="timeline-day">
+      <h3>🌊 Sunday 3 May — Last Full Day  </h3>
+      <ul>
+        <li>Morning: Final kite session or chill beach morning</li>
+        <li>Midday: Check out of Airbnb, move bags to hotel for last night</li>
+        <li>Afternoon: Explore Tarifa, grab lunch, soak it all in</li>
+        <li>Evening: Relaxed farewell dinner, sunset drinks</li>
+        <li>Some friends may depart for evening flights</li>
+      </ul>
+    </div>
+
+    <div class="timeline-day">
+      <h3>✈️ Monday 4 May — Departure <span class="badge">Bank Holiday UK</span></h3>
+      <ul>
+        <li>Morning: Breakfast, pack up, fit in a Kite sesh maybe</li>
+        <li>Drive back to Málaga Airport (~1h45)</li>
+        <li>Return rental cars, goodbye hugs, catch flights home, more goodbye hugs</li>
+        <li>Land back in London/Paris with a tan and a smile 😎</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- SECTION: GETTING THERE -->
+<div class="section-bg" style="background-image: url('photos/steps.webp');">
+<div class="photo-divider">
+  <div class="photo-text">38km of pristine white sand beaches</div>
+</div>
+
+<!-- GETTING THERE -->
+<section id="getting-there">
+  <div class="section-header">
+    <div class="icon">✈️</div>
+    <h2>Getting There</h2>
+    <p>Fly into Málaga, rent a car, drive the stunning coast road to Tarifa. Simple.</p>
+  </div>
+
+  <div class="flight-grid">
+    <div class="flight-box">
+      <div class="flight-box-header">🇬🇧 From London</div>
+      <div class="flight-box-body">
+        <div class="flight-row">
+          <span class="flight-label">Airlines</span>
+          <span class="flight-value">British Airways, EasyJet, Vueling </span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Airports</span>
+          <span class="flight-value">Gatwick</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Flight time</span>
+          <span class="flight-value">~2h 55min</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Thu 30 Apr</span>
+          <span class="flight-value">Evening flights available</span>
+        </div>
+        <div style="padding: 0.8rem 0; border-bottom: 1px solid rgba(240,240,240,0.6);">
+          <img src="photos/london1.png" alt="London outbound flight" style="width: 100%; border-radius: 10px; object-fit: cover;">
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Fri 1 May</span>
+          <span class="flight-value">Morning flights available</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Return Sun 3 May</span>
+          <span class="flight-value">Evening flights</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Return Mon 4 May</span>
+          <span class="flight-value">Morning / Afternoon</span>
+        </div>
+        <div style="padding: 0.8rem 0; border-bottom: 1px solid rgba(240,240,240,0.6);">
+          <img src="photos/london2.png" alt="London return flight" style="width: 100%; border-radius: 10px; object-fit: cover;">
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Price range</span>
+          <span class="flight-value price-highlight">£25 – £120 one-way</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flight-box">
+      <div class="flight-box-header">🇫🇷 From Paris</div>
+      <div class="flight-box-body">
+        <div class="flight-row">
+          <span class="flight-label">Airlines</span>
+          <span class="flight-value">Vueling, easyJet, Transavia</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Airports</span>
+          <span class="flight-value">Orly, CDG, Beauvais</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Flight time</span>
+          <span class="flight-value">~2h 25min</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Thu 30 Apr</span>
+          <span class="flight-value">Evening flights available</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Fri 1 May</span>
+          <span class="flight-value">Morning flights available</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Return Sun 3 May</span>
+          <span class="flight-value">Evening flights</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Return Mon 4 May</span>
+          <span class="flight-value">Evening flights</span>
+        </div>
+        <div class="flight-row">
+          <span class="flight-label">Price range</span>
+          <span class="flight-value price-highlight">€40 – €130 one-way</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 1.5rem;">
+    <div class="card-icon">🚗</div>
+    <h3>Car Rental — Málaga Airport to Tarifa</h3>
+    <p><strong>Drive time:</strong> ~1h 30min via the AP-7/E-15 motorway (beautiful coastal route!)</p>
+    <p><strong>Distance:</strong> ~150km</p>
+    <p><strong>Automatic cars from:</strong> ~€10–25/day depending on size and season</p>
+    <p><strong>We'll rent 2-3 cars</strong> to fit the group comfortably. Look for midsize or SUVs with enough boot space for bags + kite gear.</p>
+    <p style="margin-top: 0.5rem; color: #888; font-size: 0.85rem;">Top companies: MalagaCar, Marbesol, CarGest, OK Mobility. Book early for automatic!</p>
+    <p style="margin-top: 0.5rem;"><strong>Estimated cost per person for the weekend: €15–30</strong> (split across the group)</p>
+  </div>
+</section>
+</div>
+
+<!-- SECTION: ACCOMMODATION -->
+<div class="section-bg" style="background-image: url('photos/accom');">
+<div class="photo-divider">
+  <div class="photo-text">Europe's kitesurfing capital</div>
+</div>
+
+<!-- ACCOMMODATION -->
+<section id="accommodation">
+  <div class="section-header">
+    <div class="icon">🏠</div>
+    <h2>Where We're Staying</h2>
+    <p>Two stunning Airbnbs booked in the heart of Tarifa Old Town — walking restaurants,bars and beaches. These places are <em>seriously</em> special.</p>
+  </div>
+
+  <!-- AIRBNB 1: MAIN HOUSE -->
+  <div class="accom-card" style="padding: 2.5rem; margin-bottom: 2rem;">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--ocean); margin: 0;">🏛️ The Main House</h3>
+      <span class="badge" style="font-size: 0.8rem;">Thu 30 Apr → Sat 2 May</span>
+      <span class="badge-green badge" style="font-size: 0.8rem;">Up to 10 guests</span>
+    </div>
+
+    <p style="font-size: 1.1rem; color: #333; line-height: 1.7; margin-bottom: 1.2rem;">This place is a showstopper. A stunning contemporary townhouse right in Tarifa's Old Town, completely renovated with double-height ceilings, a dramatic glass staircase flooding the space with natural light, and interiors that feel like a design magazine.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+      <div style="background: rgba(255,255,255,0.4); padding: 1.2rem; border-radius: 12px; text-align: center;">
+        <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">🍽️</div>
+        <strong style="font-size: 0.9rem;">Huge dining table</strong>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 0.3rem;">Seats 10+</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.4); padding: 1.2rem; border-radius: 12px; text-align: center;">
+        <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">🌇</div>
+        <strong style="font-size: 0.9rem;">Rooftop terrace</strong>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 0.3rem;">Sun loungers
+      </div>
+      <div style="background: rgba(255,255,255,0.4); padding: 1.2rem; border-radius: 12px; text-align: center;">
+        <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">🏊</div>
+        <strong style="font-size: 0.9rem;">Plunge pool</strong>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 0.3rem;"> Perfect for cooling off</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.4); padding: 1.2rem; border-radius: 12px; text-align: center;">
+        <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">🛏️</div>
+        <strong style="font-size: 0.9rem;">5 bedrooms</strong>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 0.3rem;">Doubles + twins, all well styled </p>
+      </div>
+    </div>
+
+    <p style="color: #555; line-height: 1.7; margin-bottom: 1rem;">The bedrooms are minimalist Scandinavian-meets-Andalusian design with wooden bed frames, rattan pendant lights, modern art, and beautiful patterned floor tiles throughout.  There's a twin room too for solo friends who want to pair up.</p>
+
+    <a href="https://www.airbnb.co.uk/rooms/693382977509563663" target="_blank" style="display: inline-block; background: linear-gradient(135deg, var(--ocean), var(--ocean-light)); color: white; padding: 0.7rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: transform 0.2s;">📸 Browse the full photo gallery on Airbnb →</a>
+  </div>
+
+  <!-- LAST NIGHT HOTEL -->
+  <div class="accom-card" style="padding: 2rem; margin-bottom: 2rem;">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; color: #6B46C1; margin: 0;">🏨 Hotel for Last Night</h3>
+      <span class="badge" style="background: #6B46C1; font-size: 0.8rem;">Sun 3 May only</span>
+    </div>
+    <p style="color: #555; line-height: 1.7;">The Main House is only available until May 3rd, so for our last night (Sunday) we'll move to a boutique hotel in Old Town. Tarifa has beautiful small hotels with rooftop terraces and views of Morocco across the strait. Options like <strong>Posada La Sacristia</strong>, <strong>Silos19 Suites</strong>, or <strong>El Escondite</strong> — all charming, all affordable. Rooms from <strong>€60–120/night</strong> (shareable). We'll book once numbers are confirmed. Think of it as a mini treat to close out the weekend!</p>
+  </div>
+
+  <!-- AIRBNB 2: THE COURTYARD HOUSE -->
+  <div class="accom-card" style="padding: 2.5rem; margin-bottom: 2rem;">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--sunset); margin: 0;">🌿 The Courtyard House</h3>
+      <span class="badge" style="background: var(--sunset); font-size: 0.8rem;">Wed 30 Apr → Sun 4 May</span>
+      <span class="badge-green badge" style="font-size: 0.8rem;">Full stay</span>
+    </div>
+
+    <p style="font-size: 1.1rem; color: #333; line-height: 1.7; margin-bottom: 1.2rem;">A traditional Andalusian townhouse with all the character and charm you'd dream of. Exposed wooden beam ceilings, warm terracotta floors, a tropical courtyard filled with banana plants,and a rooftop terrace with views over the Old Town </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+      <div style="background: rgba(255,255,255,0.4); padding: 1.2rem; border-radius: 12px; text-align: center;">
+        <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">🌴</div>
+        <strong style="font-size: 0.9rem;">Tropical courtyard</strong>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 0.3rem;">Banana plants, climbing vines</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.4); padding: 1.2rem; border-radius: 12px; text-align: center;">
+        <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">☀️</div>
+        <strong style="font-size: 0.9rem;">Rooftop terrace</strong>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 0.3rem;">Shaded dining area with views over Old Town</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.4); padding: 1.2rem; border-radius: 12px; text-align: center;">
+        <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">🎨</div>
+        <strong style="font-size: 0.9rem;">Moroccan-inspired decor</strong>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 0.3rem;">Colourful art, kilim rugs, rattan lamps, wrought-iron details</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.4); padding: 1.2rem; border-radius: 12px; text-align: center;">
+        <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">🛏️</div>
+        <strong style="font-size: 0.9rem;">Double & twin rooms</strong>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 0.3rem;">Warm, cosy bedrooms with ceiling fans & en-suite bathrooms</p>
+      </div>
+    </div>
+  
+    <p style="color: #555; line-height: 1.7; margin-bottom: 1rem;">The bedrooms have that perfect warm, earthy feel, solid wood wardrobes with lattice detailing, and gorgeous soft lighting. The bathrooms feature patterned floor tiles and modern fixtures. This house is booked for the <strong>entire trip</strong> (30 Apr – 4 May), so it's our constant base.</p>
+
+    <a href="https://www.airbnb.co.uk/rooms/32733403" target="_blank" style="display: inline-block; background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; padding: 0.7rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: transform 0.2s;">📸 Browse the full photo gallery on Airbnb →</a>
+  </div>
+
+  <div class="vibe-banner" style="margin-top: 1rem;">
+    <h2>💡 Room Assignments</h2>
+    <p>Don't stress about rooms yet! Once we know the final headcount and who's coming as a couple vs. solo, we'll sort rooms to make everyone comfortable. Couples get priority on double rooms, and solo friends can pair up for twins or share a double. The key thing: everyone gets a beautiful bed in a stunning place. Friends added to this trip can eihter fit in the Airbnb's or book on eof those boutique hotels nearby! </p>
+  </div> 
+  
+</section>
+</div>
+
+
+<!-- SECTION: KITESURFING -->
+<div class="section-bg" style="background-image: url('photos/kites.jpg.webp');">
+<div class="photo-divider">
+  <div class="photo-text">Good vibes only</div>
+</div>
+
+<!-- KITESURFING -->
+<section id="kitesurfing">
+  <div class="section-header">
+    <div class="icon">🪁</div>
+    <h2>Kitesurfing in Tarifa</h2>
+    <p>Tarifa is the <strong>kitesurfing capital of Europe</strong>. Consistent wind, 38km of white sandy beaches, and world-class schools. Whether you're a pro or a total beginner — this is the place.</p>
+  </div>
+
+  <div class="kite-levels">
+    <div class="kite-level-card">
+      <div class="level-emoji">🌱</div>
+      <h3>Complete Beginner</h3>
+      <div class="price-tag">From €60–90 / session</div>
+      <p>Never touched a kite? Perfect. Tarifa's schools are the best in Europe. You'll start on the beach learning kite control, then hit the water. Typical beginner course is <strong>3 sessions of 2 hours</strong> (6hrs total). Equipment included.</p>
+      <p style="margin-top: 0.8rem;"><strong>Group lesson (3-4 people):</strong> ~€70 for 3 hours</p>
+      <p><strong>Private lesson:</strong> ~€60–90 per hour</p>
+    </div>
+
+    <div class="kite-level-card">
+      <div class="level-emoji">🏄</div>
+      <h3>Experienced Kiter</h3>
+      <div class="price-tag">Gear rental from €45–60</div>
+      <p>Bring your own gear or rent locally. Full kite + board + wetsuit rental runs about <strong>€45–60 for a half day</strong>. Tarifa has kites from 3m² to 18m² for every condition. The Poniente and Levante winds are legendary!</p>
+      <p style="margin-top: 0.8rem;"><strong>Full day rental:</strong> ~€70–90</p>
+      <p><strong>Multi-day discounts</strong> available at most shops</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 2rem;">
+    <div class="card-icon">🏫</div>
+    <h3>Recommended Schools in Tarifa</h3>
+    <p> For all the Beginners keen to start i reccomend starting on group lessons to start with, and then if soemone wants to make the most of the weekend book a private. Group lessons make it more affordable but you will have less time to practice. When you fill the form later and i have the numbers i can start organising the lessons ! </p>
+    </p> All of these are IKO-certified with excellent reviews and English-speaking instructors:</p>
+    <p style="margin-top: 0.5rem;">
+      <strong>Freeride Tarifa</strong> · <strong>Alex Pastor Kite Club</strong> · <strong>Rebels Tarifa</strong> · <strong>KitePassion</strong> · <strong>3Sixty Kite School</strong> · <strong>KiteFun Tarifa</strong>
+    </p>
+    <p style="margin-top: 0.5rem; color: #666; font-size: 0.85rem;">We'll coordinate a group booking for beginner lessons once we know numbers — group rates are much better!</p>
+  </div>
+
+  <div class="card" style="margin-top: 1rem;">
+    <div class="card-icon">❓</div>
+    <h3>What if I don't want to kite?</h3>
+    <p>No worries at all! Tarifa is incredible even without kitesurfing. You can do beach yoga, SUP (stand-up paddleboarding), surf, hike to incredible viewpoints, explore the old town's tapas bars, take a day trip to Morocco (it's visible from the beach!), or simply relax on stunning beaches with a book. This is a wellness weekend — do what feels good. But also, kite lessons a generally 2H long se we won't be gone for too long either ;). </p>
+  </div>
+</section>
+</div>
+
+<!-- SECTION: PRICES -->
+<div class="section-bg" style="background-image: url('photos/pay');">
+<div class="photo-divider">
+  <div class="photo-text">Golden hour, every hour</div>
+</div>
+
+<!-- PRICES -->
+<section id="prices">
+  <div class="section-header">
+    <div class="icon">💰</div>
+    <h2>Price Breakdown</h2>
+    <p>Here's a rough guide so you can budget. Everything is per person unless noted.</p>
+  </div>
+
+  <table class="price-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Estimated Cost</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>✈️ Flights (London)</td>
+        <td class="price-highlight">£50 – £200 return</td>
+        <td>Book early! Ryanair/easyJet from Stansted, Gatwick, or Luton</td>
+      </tr>
+      <tr>
+        <td>✈️ Flights (Paris)</td>
+        <td class="price-highlight">€80 – €250 return</td>
+        <td>Vueling, easyJet, Transavia from Orly/CDG/Beauvais</td>
+      </tr>
+      <tr>
+        <td>🚗 Car rental share</td>
+        <td class="price-highlight">€15 – €30 total</td>
+        <td>Split across 2 cars, ~€10–25/day per car + fuel (~€20)</td>
+      </tr>
+      <tr>
+        <td>🏠 Airbnb (3 nights)</td>
+        <td class="price-highlight">€80 – €150 total</td>
+        <td>Depending on room type (double vs twin), split equally</td>
+      </tr>
+      <tr>
+        <td>🏨 Hotel last night</td>
+        <td class="price-highlight">€30 – €60 per person</td>
+        <td>Shared room in boutique hotel in Old Town</td>
+      </tr>
+      <tr>
+        <td>🪁 Kite lesson (beginner)</td>
+        <td class="price-highlight">€140 – €240 total</td>
+        <td>For 2–3 sessions (6hrs). Group lessons are cheaper!</td>
+      </tr>
+      <tr>
+        <td>🪁 Gear rental (experienced)</td>
+        <td class="price-highlight">€90 – €180 total</td>
+        <td>2–3 days of half-day rentals</td>
+      </tr>
+      <tr>
+        <td>🍽️ Food & drinks</td>
+        <td class="price-highlight">€30 – €50 / day</td>
+        <td>Tarifa is affordable! Great tapas, seafood, local wine</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="vibe-banner" style="background: linear-gradient(135deg, var(--ocean), var(--mint));">
+    <h2>Estimated Total Per Person</h2>
+    <p style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">€350 – €650</p>
+    <p style="font-size: 1rem;">(excluding flights, which vary by city and booking time)</p>
+    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Beginners on the higher end (lessons), experienced kiters on the lower end</p>
+  </div>
+</section>
+</div>
+
+<!-- SECTION: FOOD -->
+<div class="section-bg" style="background-image: url('photos/silos.webp');">
+<div class="photo-divider">
+  <div class="photo-text">Tapas, wine & celebration</div>
+</div>
+
+<!-- FOOD -->
+<section id="food">
+  <div class="section-header">
+    <div class="icon">🍽️ </div>
+    <h2>Food & Birthday Dinner</h2>
+    <p>Tarifa's Old Town is packed with incredible restaurants — fresh seafood, Andalusian tapas, and Moroccan-influenced cuisine.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🥩</div>
+      <h3>Brasería Vaca Loca</h3>
+      <p>Amazing steaks (try the Retinto beef!), great mojitos, lively atmosphere. Perfect for a group celebration.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🐟</div>
+      <h3>La Pescadería</h3>
+      <p>Fresh seafood in the heart of Old Town. Shaded outdoor tables, regional specialties, relaxed vibes.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🍷</div>
+      <h3>El Lola</h3>
+      <p>Modern Andalusian tavern with shared plates and tapas. A local favourite — book ahead!</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">✨</div>
+      <h3>Silos 19</h3>
+      <p>Chicest spot in Tarifa. Stunning interiors, incredible scallops and steaks. Birthday dinner worthy!</p>
+    </div>
+  </div>
+
+  <p style="text-align: center; margin-top: 2rem; color: #666;">🎂 We'll book the birthday dinner once we have final numbers. Expect around €30–50 per person for a beautiful meal with wine.</p>
+</section>
+</div>
+
+<!-- SECTION: FAQ -->
+<div class="section-bg" style="background-image: url('photos/tumbao.jpg.webp');">
+<div class="photo-divider">
+  <div class="photo-text">Your questions, answered</div>
+</div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-header">
+    <div class="icon">💬</div>
+    <h2>Your Questions, Answered</h2>
+    <p>Everything you need to know. If something's not here, just ask!</p>
+  </div>
+
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>Do I need to know how to kitesurf? <span class="arrow">▼</span></summary>
+      <div class="faq-a">Absolutely not! Tarifa is the best place in Europe to learn. Beginner lessons start from scratch — kite control on the beach, then water starts. You'll be amazed how quickly you pick it up. And if kiting isn't your thing, there's beach yoga, surfing, SUP, hiking, and the most beautiful Old Town to explore.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is Tarifa actually a fun destination? <span class="arrow">▼</span></summary>
+      <div class="faq-a">YES. Tarifa is one of Spain's best-kept secrets. It's the southernmost point of Europe — you can literally see Africa from the beach. The Old Town is charming with winding streets, incredible food, and a relaxed bohemian vibe. The beaches stretch for 38km of white sand. The sunsets are unreal. It's where sporty, wellness-minded Europeans come to play. You'll understand when you get there.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What should I pack? <span class="arrow">▼</span></summary>
+      <div class="faq-a">Light layers for daytime (it can be windy!), swimwear, sunscreen (strong sun), a windbreaker or light jacket, comfortable shoes for cobblestone streets, and something nice for the birthday dinner. If you're an experienced kiter bringing your own gear, the airlines are generally OK with kite bags — check your airline's sports equipment policy. Beginners: everything is provided by the schools.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How does the room situation work? <span class="arrow">▼</span></summary>
+      <div class="faq-a">The main Airbnb has mostly double beds plus two twin beds. Couples will get double rooms, and solo friends can pair up for twins or share a double (if they're comfortable!). We'll sort this once the final group is confirmed. The vibe is relaxed — nobody will be sleeping on a sofa, promise.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What about the last night in a hotel? <span class="arrow">▼</span></summary>
+      <div class="faq-a">The main Airbnb is available until May 3rd, so we move to a boutique hotel for the final night (Sunday). Tarifa Old Town has beautiful small hotels with rooftop terraces and views of Morocco. It'll actually be a nice change of pace — and it means we can check out of the Airbnb stress-free and enjoy the last day without rushing. Rooms around €60–120/night (shareable for couples/friends).</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I bring a friend? <span class="arrow">▼</span></summary>
+      <div class="faq-a">Yes! The more the merrier. We have a second Airbnb on hold as backup + they can book their own accomodation too. Just let us know ASAP so we can plan accommodation and kite lessons. The cancellation deadline for the second Airbnb is mid April to end of April, so ideally confirm by then.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What if there's no wind for kitesurfing? <span class="arrow">▼</span></summary>
+      <div class="faq-a">Tarifa is one of the windiest places in Europe — it's extremely rare to have zero wind in spring. But even if the wind gods take a day off, the plan still works perfectly: beach day, Old Town exploration, day trip to Tangier (Morocco is 30 minutes by ferry!), hiking, surfing, or just chilling with good food and good people.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>When do I need to confirm by? <span class="arrow">▼</span></summary>
+      <div class="faq-a">Ideally by <strong>early April</strong> so we can finalise rooms, book kite lessons as a group, and decide on the second Airbnb. But if you're a last-minute person — just reach out, we'll make it work!</div>
+    </details>
+  </div>
+</section>
+</div>
+
+<!-- CTA (updated with your form and guest count placeholder) -->
+<div class="section-bg" style="background-image: url('photos/Stars.avif');">
+<section style="padding: 3rem 1.5rem; text-align: center;">
+  <div class="vibe-banner" style="background: linear-gradient(135deg, var(--sunset), var(--coral)); max-width: 800px; margin: 0 auto; border-radius: 24px; padding: 3.5rem 2rem; box-shadow: 0 10px 40px rgba(255,107,107,0.3);">
+    <div style="font-size: 4rem; margin-bottom: 1rem;">🌊🪁🎉</div>
+    <h2 style="font-size: clamp(2.2rem, 6vw, 3.5rem); margin-bottom: 1.2rem;">You In for the Adventure?</h2>
+    <p style="font-size: 1.3rem; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Sun, wind, epic food, birthday magic, and the best crew. Spots are limited — this is going to be unforgettable.
+    </p>
+    
+    <div style="background: rgba(255,255,255,0.3); border-radius: 20px; padding: 1.5rem; margin: 2rem auto; max-width: 500px; border: 1px solid rgba(255,255,255,0.4);">
+      <p style="font-size: 2.2rem; font-weight: 700; margin: 0; color: orange;">
+        <span id="guest-count">5</span> friends already in! 🔥
+      </p>
+      <p style="font-size: 1rem; opacity: 0.9; margin-top: 0.5rem;">(count updates as the crew grows — I'll keep it fresh!)</p>
+    </div>
+
+    <a href="https://docs.google.com/forms/d/1KlYZYoDqZZPpwkWOIM0NPn74coLM1360FOEeXLcAK5I" 
+       target="_blank"
+       style="display: inline-block; background: white; color: var(--coral); padding: 1.2rem 2.8rem; border-radius: 60px; text-decoration: none; font-weight: 700; font-size: 1.4rem; box-shadow: 0 8px 30px rgba(0,0,0,0.25); transition: all 0.3s; margin: 1rem;">
+       ✭ Count Me In! →
+    </a>
+
+    <p style="margin-top: 2rem; font-size: 1.1rem; opacity: 0.95;">
+      Super quick — just drop your name and we'll add you to the private crew list.<br>
+      Questions? Ping me on WhatsApp anytime!
+    </p>
+  </div>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer style="background-image: url('photos/Stars.avif');">
+  <div class="footer-emoji">🪁🌊🎂</div>
+  <p>Wellness & Celebration Weekend — Tarifa 2026</p>
+  <p style="margin-top: 0.5rem;">Made with love for the best birthday ever</p>
+</footer>
+
+<script>
+  // Smooth scroll for nav
+  document.querySelectorAll('.nav-bar a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
