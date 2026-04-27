@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarifa Weekend — Day by Day</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sunset-top: #1a0533;
+    --sunset-mid: #6b2fa0;
+    --sunset-orange: #ff6b35;
+    --sunset-gold: #ffa62b;
+    --sunset-pink: #ff4e8c;
+    --sand: #f5e6d0;
+    --ocean-dark: #0a3d62;
+    --ocean-light: #38ada9;
+    --white: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sunset-top);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  .poster {
+    max-width: 520px;
+    margin: 0 auto;
+    background: linear-gradient(
+      180deg,
+      #0d1b2a 0%,
+      #1b2838 4%,
+      #2c1654 10%,
+      #6b2fa0 18%,
+      #c2185b 26%,
+      #ff6b35 33%,
+      #ffa62b 38%,
+      #ffe0a0 42%,
+      #b8e4f0 46%,
+      #7ec8d9 50%,
+      #38ada9 56%,
+      #2e86ab 65%,
+      #1a5276 75%,
+      #0d2137 85%,
+      #0a1628 100%
+    );
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 4rem;
+  }
+
+  /* Stars in the sky */
+  .stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+
+  /* Sun */
+  .sun {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, #ffe566 0%, #ffa62b 40%, rgba(255,107,53,0.4) 70%, transparent 100%);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .sun::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, #fff8e0 0%, #ffe566 50%, transparent 100%);
+    border-radius: 50%;
+  }
+
+  /* Water reflection */
+  .water-reflection {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 120px;
+    background: linear-gradient(180deg, rgba(255,230,160,0.4) 0%, rgba(255,166,43,0.15) 40%, transparent 100%);
+    filter: blur(8px);
+    z-index: 1;
+  }
+
+  /* Kite SVGs */
+  .kite-container {
+    position: absolute;
+    top: 6%;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .kite {
+    position: absolute;
+    animation: kiteFloat 6s ease-in-out infinite;
+  }
+
+  .kite:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; }
+  .kite:nth-child(2) { left: 72%; top: 35%; animation-delay: 2s; transform: scale(0.7); }
+  .kite:nth-child(3) { left: 45%; top: 10%; animation-delay: 4s; transform: scale(0.5); }
+
+  @keyframes kiteFloat {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    25% { transform: translateY(-12px) rotate(3deg); }
+    50% { transform: translateY(-5px) rotate(-2deg); }
+    75% { transform: translateY(-15px) rotate(5deg); }
+  }
+
+  /* Header */
+  .header {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 3rem 2rem 1rem;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+
+  .header .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    opacity: 0.9;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+  }
+
+  .header .date-badge {
+    display: inline-block;
+    margin-top: 1rem;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .crew-count {
+    text-align: center;
+    padding: 1.5rem 2rem 0;
+    position: relative;
+    z-index: 3;
+    font-size: 1.6rem;
+  }
+
+  /* Day cards */
+  .days {
+    position: relative;
+    z-index: 3;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .day-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 1.8rem;
+    backdrop-filter: blur(4px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .day-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .day-card.friday::before { background: linear-gradient(180deg, var(--sunset-gold), var(--sunset-orange)); }
+  .day-card.saturday::before { background: linear-gradient(180deg, var(--sunset-pink), #ff2d55); }
+  .day-card.sunday::before { background: linear-gradient(180deg, var(--ocean-light), #48dbfb); }
+  .day-card.monday::before { background: linear-gradient(180deg, #a29bfe, #6c5ce7); }
+
+  .day-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.7;
+    margin-bottom: 0.2rem;
+  }
+
+  .day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .day-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .day-card li {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    padding-left: 1.8rem;
+    position: relative;
+    opacity: 0.92;
+    font-weight: 300;
+  }
+
+  .day-card li::before {
+    content: attr(data-time);
+    position: absolute;
+    left: 0;
+    font-size: 0.85rem;
+  }
+
+  .day-card li.highlight {
+    font-weight: 600;
+    opacity: 1;
+    font-size: 0.95rem;
+  }
+
+  .day-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+    margin: 0.4rem 0;
+  }
+
+  /* Footer wave */
+  .footer-note {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 1rem 2rem 2rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    opacity: 0.8;
+  }
+
+  /* Sand dunes silhouette */
+  .dunes {
+    position: absolute;
+    top: 42%;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="poster">
+
+  <!-- Stars -->
+  <div class="stars">
+    <div class="star" style="top:8%;left:12%;width:2px;height:2px;animation-delay:0s;"></div>
+    <div class="star" style="top:5%;left:35%;width:3px;height:3px;animation-delay:1s;"></div>
+    <div class="star" style="top:12%;left:55%;width:2px;height:2px;animation-delay:0.5s;"></div>
+    <div class="star" style="top:3%;left:78%;width:2px;height:2px;animation-delay:2s;"></div>
+    <div class="star" style="top:15%;left:90%;width:3px;height:3px;animation-delay:1.5s;"></div>
+    <div class="star" style="top:7%;left:65%;width:1px;height:1px;animation-delay:0.8s;"></div>
+    <div class="star" style="top:18%;left:22%;width:1px;height:1px;animation-delay:2.3s;"></div>
+    <div class="star" style="top:2%;left:48%;width:2px;height:2px;animation-delay:1.2s;"></div>
+  </div>
+
+  <!-- Kites -->
+  <div class="kite-container">
+    <svg class="kite" width="50" height="65" viewBox="0 0 50 65">
+      <polygon points="25,0 50,25 25,50 0,25" fill="rgba(255,107,53,0.8)" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+      <line x1="25" y1="50" x2="25" y2="65" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+      <line x1="25" y1="0" x2="25" y2="50" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+      <line x1="0" y1="25" x2="50" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+    </svg>
+    <svg class="kite" width="50" height="65" viewBox="0 0 50 65">
+      <polygon points="25,0 50,25 25,50 0,25" fill="rgba(255,78,140,0.7)" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+      <line x1="25" y1="50" x2="25" y2="65" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+      <line x1="25" y1="0" x2="25" y2="50" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+      <line x1="0" y1="25" x2="50" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+    </svg>
+    <svg class="kite" width="50" height="65" viewBox="0 0 50 65">
+      <polygon points="25,0 50,25 25,50 0,25" fill="rgba(56,173,169,0.7)" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+      <line x1="25" y1="50" x2="25" y2="65" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+      <line x1="25" y1="0" x2="25" y2="50" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+      <line x1="0" y1="25" x2="50" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Sun -->
+  <div class="sun"></div>
+  <div class="water-reflection"></div>
+
+  <!-- Dune silhouette -->
+  <svg class="dunes" viewBox="0 0 520 60" preserveAspectRatio="none">
+    <path d="M0,40 Q60,10 130,35 Q200,55 280,30 Q350,10 420,38 Q480,50 520,30 L520,60 L0,60 Z" fill="rgba(194,164,120,0.15)"/>
+  </svg>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Tarifa</h1>
+    <div class="subtitle">wind, waves & birthday magic</div>
+    <div class="date-badge">1 — 4 May 2026</div>
+  </div>
+
+  <div class="crew-count">🪁 10 amigos confirmed 🪁</div>
+
+  <!-- Day Cards -->
+  <div class="days">
+
+    <!-- FRIDAY -->
+    <div class="day-card friday">
+      <div class="day-label">Day One</div>
+      <div class="day-title">🌅 Friday</div>
+      <ul>
+        <li data-time="☕">Drive to Power House Café for breakfast</li>
+        <li data-time="🪁">Drive to kitesurf spot — chill, drinks, lessons</li>
+        <li data-time="🏖️">Chiringuito late afternoon</li>
+        <li data-time="🚿">Back to Airbnbs — shower & get ready</li>
+        <li data-time="🍷" class="highlight">Group dinner in Old Town</li>
+        <li data-time="🥂">Drinks & good times</li>
+      </ul>
+    </div>
+
+    <!-- SATURDAY -->
+    <div class="day-card saturday">
+      <div class="day-label">Day Two</div>
+      <div class="day-title">🎂 Saturday — Birthday!</div>
+      <ul>
+        <li data-time="🧘">Morning yoga on the Rooftop -  Sara </li>
+        <li data-time="☕">Drive to Power House Café for breakfast</li>
+        <li data-time="🪁">Kitesurf spot — chill, drinks, lessons</li>
+        <li data-time="🌊">Waves chiringuito post kite-lessons </li>
+        <li data-time="🚿">Back to Airbnbs — shower & get ready</li>
+        <li data-time="🍹" class="highlight">Pre-drinks on the Rooftop</li>
+        <li data-time="🎉" class="highlight">Birthday dinner!</li>
+        <li data-time="💃">Drinks, dancing & celebrations</li>
+      </ul>
+    </div>
+
+    <!-- SUNDAY -->
+    <div class="day-card sunday">
+      <div class="day-label">Day Three</div>
+      <div class="day-title">🌊 Sunday</div>
+      <ul>
+        <li data-time="🥣">Breakfast on the Rooftop</li>
+        <li data-time="📦">Check out Airbnb 1 → drop bags at Airbnb 2 / Everyone pack changing clothes for dinner </li>
+        <li data-time="🧘" class="highlight"> Morning Dunes guided meditation - Sara </li>
+        <li data-time="🪁">Kitesurf spot — chill, drinks, snacks, lessons</li>
+        <li data-time="🏖️">Chiringuito</li>
+        <li data-time="✈️" style="opacity:0.6; font-size:0.8rem;">Paul, Vic, Sara & Alex → Málaga airport</li>
+        <li data-time="🍽️" class="highlight">Early dinner in the mountain m</li>
+       
+      </ul>
+    </div>
+
+    <!-- MONDAY -->
+    <div class="day-card monday">
+      <div class="day-label">Day Four</div>
+      <div class="day-title">✈️ Monday — Last Day</div>
+      <ul>
+        <li data-time="📦">Everyone checks out</li>
+        <li data-time="☕">Find a breakfast spot</li>
+        <li data-time="🪁">Final kite session</li>
+        <li data-time="🏖️">Beach all day — full chill mode</li>
+        <li data-time="🍽️">Late lunch somewhere nice</li>
+        <li data-time="😎">More chilling, soaking it all in</li>
+        <li data-time="✈️">Drive to airport & fly home with a tan</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    Where we let go ✦ And make space for laughter and hugs! 
+  </div>
+
+</div>
+
+</body>
+</html>
